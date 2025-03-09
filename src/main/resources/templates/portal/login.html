@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人信息中心-登陆</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl" style="font-weight: bolder;font-size: larger"><span>欢迎来到蓝海旅游出行指南平台！</span> </b></div>
+        <div class="top_hr"><a th:href="@{/register}">用户注册</a>  |  <a th:href="@{/goLogin}">登录</a>
+    </div>
+</div>
+<!--<div class="head_w">-->
+<!--    <div class="head_t clearfix">-->
+<!--        <div class="logo"><img src="images/logo.jpg"/></div>-->
+<!--        <div class="rx_line"><img src="images/rx.jpg"/></div>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li  class="cur"><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelRoute}">出行路线</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelSpot}">景点</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/car}">车票预订</a><img src="images/nav_line.jpg"/></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+        <!--        <!--        <li ><a th:href="@{/strategy}">游客攻略心得</a><img src="images/nav_line.jpg"/></li>-->
+-->
+
+        <li><a th:href="@{/attention}">旅行必看</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">个人信息中心</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName==null}"><a th:href="@{/login.html}">后台管理</a><img src="images/nav_line.jpg"/></li></ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a>  >> <a th:href="@{/goLogin}">用户登录</a></div>
+    <div class="login_w clearfix">
+    <form class="layui-form" method="post" action="/userLoging">
+        <div class="login">
+            <div class="login_t">用户登录</div>
+            <div class="login_con">
+                <table class="login_tab" width="270" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td>用户名：</td>
+                    <td><input type="text" id="userName" name="userName" value="" placeholder="请输入用户名"/></td>
+                  </tr>
+                  <tr>
+                    <td>密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                    <td><input type="password" id="password" name="password" value="" placeholder="请输入密码"/></td>
+                  </tr>
+                  <tr>
+                      <td></td>
+                       <td th:text="${message}" ></td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td><button class="log_b" type="submit">登 录</button>
+                        <!--<a class="back_m" th:href="@{/changePassword}">找回密码</a>--></td>
+                  </tr>
+                </table>
+            </div>
+            <div class="login_b">
+                <p>还不是用户？  <a class="free_zc" th:href="@{/register}">免费注册</a> </p>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+
+</body>
+</html>

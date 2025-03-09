@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>蓝海旅游出行指南平台首页</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/imgtoggle.js"></script>
+    <link href="css/ft-carousel.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/ft-carousel.min.js"></script>
+    <style>
+        .recommend-section {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .recommend-section h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .recommend-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .recommend-item {
+            width: 200px;
+            text-align: center;
+        }
+
+        .recommend-item img {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .recommend-item p {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+        }
+        /*    !* 导航栏背景颜色 *!*/
+        /*.mainNav {*/
+        /*    background-color: red; !* 修改为你想要的颜色 *!*/
+        /*}*/
+
+        /*!* 导航栏文字颜色 *!*/
+        /*.mainNav .Nav_ul li a {*/
+        /*    color: seagreen; !* 修改为你想要的文字颜色 *!*/
+        /*    font-weight: bold; !* 加粗文字 *!*/
+        /*}*/
+
+        /* 当前选中的菜单项颜色 */
+        .mainNav .Nav_ul li.cur a {
+            color: darkcyan; /* 当前选中的文字颜色 */
+            font-weight: bold; /* 加粗文字 */
+        }
+
+        /* 鼠标悬停时改变颜色 */
+        .mainNav .Nav_ul li a:hover {
+            color: seagreen; /* 修改为你想要的悬停颜色 */
+        }
+
+        /* 导航栏分隔线颜色 */
+        .mainNav .Nav_ul li img {
+            filter: brightness(0) invert(1); /* 你可以调整这个图片的颜色或透明度 */
+        }
+
+        .example {width: 1000px;height: 500px;text-align: center;margin: 20px auto;background-color: #464576;}
+       /* .carousel-item{line-height: 336px;color: #fff;font-family:  Arial Black}*/
+
+    </style>
+<script type="text/javascript">
+window.onload=function(){
+    var iTgl=new k_iToggle();
+        iTgl.init({
+            boxId:'box',
+            numId:'num',
+            imgId:'imgs',
+            isAuto:true,
+            aCls:'act',
+            iCls:'imgs1',
+            direct:'crt'
+        });
+        chg(iTgl,'chg');
+        _auto(iTgl,'auto_1');
+        
+    //改变方向
+    function chg(o,id){
+        $('#'+id).click(function(){
+            if(o.direct()=='crt'){
+                o.direct('lvl');
+                $(this).text('纵向');
+            }else{
+                o.direct('crt');
+                $(this).text('横向');
+            }
+        });
+    }
+    
+    function _auto(o,id){
+        $('#'+id).click(function(){
+            if(o.isAuto){
+                o.isAuto=false;
+                $(this).text('自动播放已停止');
+            }else{
+                o.isAuto=true;
+                o.auto();
+                $(this).text('自动播放');
+            }
+        });
+    }
+}
+</script>
+<script type="text/javascript"> 
+    $(function(){
+        var wweya_li =$("div.tab_menu ul li");
+        wweya_li.click(function(){
+        $(this).addClass("selected")            
+         .siblings().removeClass("selected");  
+            var index =  wweya_li.index(this); 
+        $("div.tab_box > div")  
+        .eq(index).show(100)   
+            .siblings().hide(); 
+                }).hover(function(){
+            $(this).addClass("hover");
+        },function(){
+            $(this).removeClass("hover");           
+        });
+    });
+</script>
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hl" style="font-weight: bolder;font-size: larger"><span>欢迎来到蓝海旅游出行指南平台！</span> </b></div>
+
+        <div class="top_hr">
+            <a th:if="${session.userName==null}" th:href="@{/register}" style="color: #28a745; text-decoration: none;">用户注册</a>
+            |
+            <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}" style="color: #333;"></span>
+            <a th:if="${session.userName==null}" th:href="@{/goLogin}" style="color: #007bff; text-decoration: none;">登录</a>
+            |
+            <a th:if="${session.userName!=null}" th:href="@{/goLogout}" style="color: #6c757d; text-decoration: none;">退出</a>
+        </div>
+    </div>
+</div>
+
+<!--<div class="clumn_tit t01">查找路线-->
+<!--    <div class="layui-input-inline">-->
+<!--        <input type="text" name="query" th:value="${query}" placeholder="请输入标题" class="layui-input search_input"/>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;                    <button style="" type="submit">查询</button>&ndash;&gt;-->
+<!--    <button type="submit" class="layui-btn layui-bg-orange">查询</button>-->
+<!--</div>-->
+
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li class="cur"><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelRoute}">出行路线</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/travelSpot}">景点</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/car}">车票预订</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
+<!--        <li><a th:href="@{/strategy}">游客攻略心得</a><img src="images/nav_line.jpg"/></li>-->
+        <li><a th:href="@{/attention}">旅行必看</a><img src="images/nav_line.jpg"/></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">个人信息中心</a><img src="images/nav_line.jpg"/></li>
+         <li th:if="${session.userName==null}"><a th:href="@{/login.html}">后台管理</a><img src="images/nav_line.jpg"/></li>
+
+    </ul>
+</div>
+
+
+
+
+
+<div class="example" style="width: 1000px;height: 500px">
+    <div class="ft-carousel" id="carousel_1">
+        <ul class="carousel-inner">
+            <li class="carousel-item"><img src="images/aa3.jpg" /></li>
+            <li class="carousel-item"><img src="travelRoute/xihu.jpg" /></li>
+            <li class="carousel-item"><img src="travelRoute/changcheng.jpg" /></li>
+        </ul>
+    </div>
+    <div class="recommend-section">
+        <h2>推荐景点</h2>
+        <div class="recommend-container">
+            <div class="recommend-item">
+                <img src="travelRoute/xihu.jpg" alt="景点1">
+                <p><a href="http://localhost/travelRoutePortalView?id=bfa15c6e1fd347c889df02e84f883eb1">美丽的西湖</a></p>
+            </div>
+            <div class="recommend-item">
+                <img src="travelRoute/changcheng.jpg" alt="景点2">
+                <p><a href="http://localhost/travelRoutePortalView?id=a49135b717de43e3b731e734d65f5ea5">壮观的万里长城</a></p>
+            </div>
+            <div class="recommend-item">
+                <img src="travelRoute/qinbing.jpg" alt="景点3">
+                <p><a href="http://localhost/travelRoutePortalView?id=75cb0e8e5b0a447189804cbc8c16eb6c">神奇的秦兵马俑</a></p>
+            </div>
+            <div class="recommend-item">
+                <img src="travelRoute/huangshan.jpg" alt="景点4">
+                <p><a href="http://localhost/travelRoutePortalView?id=d83829ea27df4f009832c6acb8c883b0">人间仙境——黄山</a></p>
+            </div>
+        </div>
+
+    </div>
+    <footer style="text-align: center; padding: 10px 0; background-color: #f1f1f1; color: #333; font-size: 14px;">
+        © 2025 蓝海旅游出行指南平台. All Rights Reserved.
+    </footer>
+</div>
+<script>
+
+    $("#carousel_1").FtCarousel();
+
+</script>
+
+</body>
+</html>
