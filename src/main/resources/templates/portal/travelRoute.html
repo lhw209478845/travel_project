@@ -155,7 +155,7 @@ window.onload=function(){
           <div class="js_wrap claerdix">
             <div class="js_con clearfix" th:each="var,iterStat: ${pageData}">
                <div class="js_l"><a th:href="@{/travelRoutePortalView(id=${var.id})}">
-                   <img th:src="${var.imgUrl}" style="    height: 75px;"/></a></div>
+                   <img th:src="${var.imgUrl}" style=" width: 100px;height: 75px;"/></a></div>
               <div class="js_c">
                 <p><b><a th:href="@{/travelRoutePortalView(id=${var.id})}" th:text="${var.title}"></a></b></p>
                <!-- <p><a class="js_pl" href="#"><span>0</span>条评论</a> <a class="js_gm" href="#"><span>102</span>人购买</a></p>-->
